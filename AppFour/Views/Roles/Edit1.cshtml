@@ -1,0 +1,15 @@
+﻿@model AppFour.Models.Roles.ChangeRoleModel1
+
+<h4>Change users at role @Model.RoleName</h4>
+
+<form asp-action="Edit2" method="post">
+    <input type="hidden" name="roleId" value="@Model.RoleId" />
+    <div class="form-group">
+        @foreach(AppFour.Models.Entrance.User user in Model.UsersAll)
+        {
+            <input type="checkbox" name="users" value="@user.Id"
+                   @(Model.UsersInRole.Contains(user) ? "checked=\"checked\"" : "") /> @user.UserName <br />
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

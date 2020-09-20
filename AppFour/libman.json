@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "twitter-bootstrap@4.4.1",
+      "destination": "wwwroot/twitter-bootstrap/"
+    },
+    {
+      "library": "jquery@3.5.1",
+      "destination": "wwwroot/jquery/"
+    },
+    {
+      "library": "showdown@1.9.1",
+      "destination": "wwwroot/markdown/showdown/"
+    },
+    {
+      "library": "jquery.fileDownload@1.4.2",
+      "destination": "wwwroot/filedrop/jquery.fileDownload/"
+    }
+  ]
+}

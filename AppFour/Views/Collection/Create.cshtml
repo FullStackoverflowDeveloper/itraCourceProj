@@ -1,0 +1,114 @@
+﻿@model AppFour.Models.Collection.CollectionAction;
+@{
+    ViewData["Title"] = "Collections";
+}
+
+<div class="container">
+    <h3 class="text-black text-center">Create collection</h3>
+    <div class="text-danger" asp-validation-summary="All"></div>
+
+    <form method="post" asp-action="Create" asp-controller="Collection" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="Title">Name:</label>
+            <input asp-for="Title" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">Description:</label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="Topic">Topic:</label>
+            <br />
+            <select asp-for="Topic" asp-items="Html.GetEnumSelectList<AppFour.Globals.Topic>()">
+                <option selected="selected" value="">Please select</option>
+            </select>
+            <span asp-validation-for="Topic" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Image">Image:</label>
+            <div class="file-drop-area">
+                <span class="file-msg">Drag and drop image here</span>
+                <input class="file-input" type="file" multiple asp-for="Image" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
+
+<style>
+    
+section {
+  flex-grow: 1;
+}
+
+.file-drop-area {
+    background-color: white;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 450px;
+    max-width: 100%;
+    padding: 25px;
+    border: 1px dashed rgba(255, 255, 255, 0.4);
+    border-radius: 3px;
+    transition: 0.2s;
+    &.is-active {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.file-msg {
+  font-size: small;
+  font-weight: 300;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  opacity: 0;
+  &:focus {
+    outline: none;
+  }
+}
+
+
+</style>
+
+<script src="~/jquery/jquery.js"></script>
+<script>
+    var $fileInput = $('.file-input');
+    var $droparea = $('.file-drop-area');
+
+    // highlight drag area
+    $fileInput.on('dragenter focus click', function () {
+        $droparea.addClass('is-active');
+    });
+
+    // back to normal state
+    $fileInput.on('dragleave blur drop', function () {
+        $droparea.removeClass('is-active');
+    });
+
+    // change inner text
+    $fileInput.on('change', function () {
+        var filesCount = $(this)[0].files.length;
+        var $textContainer = $(this).prev();
+
+        if (filesCount === 1) {
+            // if single file is selected, show file name
+            var fileName = $(this).val().split('\\').pop();
+            $textContainer.text(fileName);
+        } else {
+            // otherwise show number of files
+            $textContainer.text(filesCount + ' files selected');
+        }
+    });
+</script>
