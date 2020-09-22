@@ -10,7 +10,6 @@ using LinqToDB;
 using AppFour.Cotexts;
 using Microsoft.AspNetCore.Identity;
 using AppFour.Models.Entrance;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
 namespace AppFour.Controllers

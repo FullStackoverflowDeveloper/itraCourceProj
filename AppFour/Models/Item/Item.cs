@@ -4,6 +4,8 @@
     {
         public string Id { get; set; }
         public string Title { get; set; }
+
         public string CollectionId { get; set; }
+        public Collection.Collection Collection { get; set; }
     }
 }
