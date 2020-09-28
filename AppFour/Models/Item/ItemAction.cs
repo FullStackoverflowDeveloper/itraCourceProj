@@ -1,26 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using AppFour.Models.Fields;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AppFour.Models.Item
 {
     public class ItemAction
     {
-        public List<Item> items;
         public string Id { get; set; }
         public string Title { get; set; }
         public string CollectionId { get; set; }
 
-        public string CollectionID { get; set; }
-        public ItemAction(List<Item> items, string collectionID)
+        public static IEnumerable<CustomField> ItemFields { get; set; }
+        public static IQueryable<FieldData> ItemData { get; set; }
+        public static string[] DataId { get; set; }
+        public List<Item> items;
+        public ItemAction(List<Item> collectionItems, string collectionID)
         {
-            this.items = items;
-            CollectionID = collectionID;
-        }
-        public ItemAction(string collectionID)
-        {
+            items = collectionItems;
             CollectionId = collectionID;
         }
-        public ItemAction()
+
+        public ItemAction(string collectionID, IEnumerable<CustomField> InputFields)
         {
+            ItemFields = InputFields;
+            CollectionId = collectionID;
         }
+
+        public ItemAction(){}
     }
 }

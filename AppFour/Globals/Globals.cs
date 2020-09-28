@@ -1,15 +1,13 @@
-﻿using AppFour.Models.Entrance;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-
-namespace AppFour.Globals
+﻿namespace AppFour.Globals
 {
     public enum Topic
     {
         Alcohol, Books, Cars, Animals, Insects
     }
-    public static class Globals
+    public enum ValueType
     {
-    
+        Date, Text
     }
 }
+
+//Currency, Date, DateTime, Email, MultilineText, Phone, PostalCode, Text, Time

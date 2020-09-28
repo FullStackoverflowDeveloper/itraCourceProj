@@ -11,6 +11,8 @@ using AppFour.Cotexts;
 using Microsoft.AspNetCore.Identity;
 using AppFour.Models.Entrance;
 using Microsoft.AspNetCore.Http;
+using AppFour.Models.Fields;
+using System.Threading.Tasks;
 
 namespace AppFour.Controllers
 {
@@ -40,10 +42,10 @@ namespace AppFour.Controllers
             return RedirectToAction("MyCollections", "Collection");
         }
 
-        public IActionResult MyCollections()
+        public async Task<IActionResult> MyCollections()
         {
             List<Collection> collectionsView = new List<Collection>();
-            List<Collection> collection = Context.Collections.ToList();
+            List<Collection> collection = await Context.Collections.ToListAsync();
             foreach (var it in collection)
             {
                 if (it.UserId == userManager.GetUserId(HttpContext.User))
@@ -55,9 +57,9 @@ namespace AppFour.Controllers
             return View("CollectionsManager", collectionsView);
         }
 
-        public IActionResult AllCollections()
+        public async Task<IActionResult> AllCollections()
         {
-            List<Collection> collectionsView = Context.Collections.ToList();
+            List<Collection> collectionsView = await Context.Collections.ToListAsync();
             foreach (var it in collectionsView)
             {
                 it.Description = Markdown.Parse(it.Description);
@@ -68,11 +70,20 @@ namespace AppFour.Controllers
         public IActionResult Create() => View();
 
         [HttpPost]
-        public IActionResult Create(CollectionAction collection)
+        public async Task<IActionResult> Create(DataForm AllData)
         {
-            collection.UserId = userManager.GetUserId(HttpContext.User);
-            Context.Collections.Add(CollectionProcessing.GetCollection(collection));
-            Context.SaveChanges();
+            CollectionAction collectionAct = new CollectionAction(AllData.Title, AllData.Description, AllData.Topic, AllData.Image,userManager.GetUserId(HttpContext.User));
+            Collection collection = CollectionProcessing.CollectionProcess(collectionAct);
+            if (AllData.AdditionalFields != "[]")
+            {
+                List<CustomField> fields = FieldProcessing.FieldsProcess(AllData.AdditionalFields, collection.Id);
+                for (int i = 0; i < fields.Count; i++)
+                {
+                    await Context.CustomFields.AddAsync(fields[i]);
+                }
+            }
+            await Context.Collections.AddAsync(collection);
+            await Context.SaveChangesAsync();
             return RedirectToAction("MyCollections", "Collection");
         }
 
@@ -83,8 +94,7 @@ namespace AppFour.Controllers
 
         public IActionResult Update1(CollectionAction collection)
         {
-            collection.UserId = userManager.GetUserId(HttpContext.User);
-            Context.Collections.Update(CollectionProcessing.GetCollection(collection));
+            Context.Collections.Update(CollectionProcessing.CollectionProcess(collection));
             Context.SaveChanges();
             return RedirectToAction("MyCollections", "Collection");
         }

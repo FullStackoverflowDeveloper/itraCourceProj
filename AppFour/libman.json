@@ -17,6 +17,21 @@
     {
       "library": "jquery.fileDownload@1.4.2",
       "destination": "wwwroot/filedrop/jquery.fileDownload/"
+    },
+    {
+      "library": "jqwidgets@10.1.5",
+      "destination": "wwwroot/jqwidgets/",
+      "files": [
+        "jqwidgets/jqxknockout.min.js",
+        "jqwidgets/jqxknockout.js"
+      ]
+    },
+    {
+      "library": "knockout-es5@0.4.6",
+      "destination": "wwwroot/knockout-es5/",
+      "files": [
+        "knockout-es5.js"
+      ]
     }
   ]
 }

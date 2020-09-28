@@ -104,3 +104,4 @@ F:\itra\CourseProject\AppFour\AppFour\obj\Release\netcoreapp3.1\staticwebassets\
 F:\itra\CourseProject\AppFour\AppFour\obj\Release\netcoreapp3.1\AppFour.dll
 F:\itra\CourseProject\AppFour\AppFour\obj\Release\netcoreapp3.1\AppFour.pdb
 F:\itra\CourseProject\AppFour\AppFour\obj\Release\netcoreapp3.1\AppFour.genruntimeconfig.cache
+F:\itra\CourseProject\AppFour\AppFour\obj\Release\netcoreapp3.1\AppFour.csprojAssemblyReference.cache

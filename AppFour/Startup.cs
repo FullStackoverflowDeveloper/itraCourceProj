@@ -24,7 +24,7 @@ namespace AppFour
         {
             services.AddMarkdown();
             services.AddMvc().AddApplicationPart(typeof(MarkdownPageProcessorMiddleware).Assembly);
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddDbContext<AppDbContext>(opts => opts.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             services.ConfigureApplicationCookie(opts => opts.LoginPath = "/");
             services.Configure<IdentityOptions>(opts =>

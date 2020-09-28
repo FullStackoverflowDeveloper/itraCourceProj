@@ -38,7 +38,7 @@
                         </div>
                     </td>
                     <td><img src="@clln.ImgUrl" width="50" height="50" asp-append-version="true" /></td>
-                    <td><a asp-action="GetItems" asp-controller="Item" asp-route-collectionID="@clln.Id">@clln.Title</a></td>
+                    <td><a asp-action="GetCollectionItems" asp-controller="Item" asp-route-collectionID="@clln.Id">@clln.Title</a></td>
                     <td>@Html.Raw(@clln.Description)</td>
                     <td>@clln.Topic</td>
                     <td>

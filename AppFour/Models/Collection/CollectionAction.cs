@@ -1,7 +1,7 @@
 ﻿using AppFour.Globals;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Reflection.Metadata;
 
 namespace AppFour.Models.Collection
 {
@@ -17,5 +17,18 @@ namespace AppFour.Models.Collection
         public IFormFile Image { get; set; }
         public string ImgUrl { get; set; }
         public string ImageCloudId { get; set; }
+
+        public CollectionAction()
+        { 
+        }
+
+        public CollectionAction(string Title, string Description, Topic? Topic, IFormFile Image, string UserId)
+        {
+            this.Title = Title;
+            this.Description = Description;
+            this.Topic = Topic;
+            this.Image = Image;
+            this.UserId = UserId;
+        }
     }
 }

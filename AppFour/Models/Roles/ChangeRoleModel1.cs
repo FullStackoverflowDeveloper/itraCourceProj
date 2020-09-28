@@ -1,5 +1,6 @@
 ﻿using AppFour.Models.Entrance;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AppFour.Models.Roles
 {

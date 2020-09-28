@@ -2,9 +2,11 @@
 using System.Linq;
 using AppFour.Cotexts;
 using AppFour.Globals;
+using AppFour.Models.Fields;
 using AppFour.Models.Item;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppFour.Controllers
 {
@@ -30,21 +32,22 @@ namespace AppFour.Controllers
                 if (button.Equals("Update"))
                     return RedirectToAction("Update", "Item", new { collectionID });
             }
-            return RedirectToAction("GetItems", "Item");
+            return RedirectToAction("GetCollectionItems", "Item");
         }
 
-        public IActionResult GetItems(string collectionID)
+        public IActionResult GetCollectionItems(string collectionID)
         {
-            List<Item> itemsById = new List<Item>();
+            List<Item> collectionItems = new List<Item>();
             foreach (var item in Context.Items.ToList())
             {
-                if (item.CollectionId == collectionID)
-                    itemsById.Add(item);
+                if (item.CollectionId == collectionID) {
+                    collectionItems.Add(item); 
+                }
             }
-            ItemAction itemsView = new ItemAction(itemsById, collectionID);
+            ItemAction itemsView = new ItemAction(collectionItems, collectionID);
             return View("ItemsManager", itemsView);
         }
-
+        
         public IActionResult GetAllItems()
         {
             List<Item> items = Context.Items.ToList();
@@ -53,15 +56,15 @@ namespace AppFour.Controllers
 
         public IActionResult Create(string collectionID)
         {
-            ItemAction item = new ItemAction(collectionID);
+            IEnumerable<CustomField> ItemFields = Context.CustomFields.Include(f => f.Collection).Where(c => c.CollectionId == collectionID);
+            ItemAction item = new ItemAction(collectionID, ItemFields);
             return View("Create", item);
         }
 
-        public IActionResult Create1(ItemAction item)
+        public IActionResult Create1(ItemAction item, string[] DataFieldId, string[] DataValue)
         {
-            Context.Items.Add(ItemProcessing.GetItem(item));
-            Context.SaveChanges();
-            return RedirectToAction("GetItems", "Item", new { collectionID = item.CollectionId });
+            string collectionID = ItemProcessing.ItemProcess(item, DataFieldId, DataValue, Context);
+            return RedirectToAction("GetCollectionItems", "Item", new { collectionID });
         }
 
         public IActionResult Delete(string[] ids, string collectionID)
@@ -72,25 +75,21 @@ namespace AppFour.Controllers
                 Context.Items.Remove(item);
                 Context.SaveChanges();
             }
-            return RedirectToAction("GetItems", "Item", new { collectionID });
+            return RedirectToAction("GetCollectionItems", "Item", new { collectionID });
         }
 
-        public IActionResult Update(string itemID)
+        public IActionResult Update(string itemId)
         {
-            Item item = Context.Items.Find(itemID);
-            ItemAction itemUpdate = new ItemAction
-            {
-                Id = item.Id,
-                Title = item.Title,
-                CollectionId = item.CollectionId
-            };
+            ItemAction itemUpdate = ItemProcessing.GetItem(itemId, Context);
+            
             return View(itemUpdate);
         }
-        public IActionResult Update1(ItemAction item)
+
+        public IActionResult Update1(ItemAction item, string[] DataFieldId, string[] DataValue, string[] DataId)
         {
-            Context.Items.Update(ItemProcessing.GetItem(item));
-            Context.SaveChanges();
-            return RedirectToAction("GetItems", "Item", new { item.CollectionId });
+            ItemAction.DataId = DataId;
+            string collectionID = ItemProcessing.ItemProcess(item, DataFieldId, DataValue, Context);
+            return RedirectToAction("GetCollectionItems", "Item", new { collectionID });
         }
     }
 }

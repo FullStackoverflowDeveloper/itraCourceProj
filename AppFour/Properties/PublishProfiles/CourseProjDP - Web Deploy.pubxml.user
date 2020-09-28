@@ -8,4 +8,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASu1kTfeL106N7h9FjJzznQAAAAACAAAAAAAQZgAAAAEAACAAAABtYcLyQmgOf+Ojnoi1zVJcsVMA6BKGCKKx+pG98OEsKwAAAAAOgAAAAAIAACAAAAA8O9n3m32b26U8C8UKscc4YvItlSriG8SfsnPmLlvVZoAAAADp/F/u2hOULp6i2R4q66s8Ea+YYuGmbwnMBGTWzReVNz10S+7jdv3HPAHggpFSHEEhUtMG67HNxJC3pOifAi9XpxAotIL4ApJzsQtqAdgvrcNGWI0MijyKFwafp1N37c9n4HPMhflGs3kZwjwgAhZ0kkCFMKEMLchOdMnVTSkiDEAAAACXLC7JtUTuonu0KnTEmXhrWg+QyOeBuLo6Nm+oTzdnspTNM6nTaelBTGw5NJgpgKaQ+3bEKt/SGacKhAxZjGyW</EncryptedPassword>
   </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:courseproject-server.database.windows.net,1433%3bInitial Catalog=UsersDB%3bUser Id=DmitriyPavlovskiy%40courseproject-server%3bPassword=Dmitriy5473125</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="AppFour.Cotexts.AppDbContext">
+      <Value>Data Source=tcp:courseproject-server.database.windows.net,1433%3bInitial Catalog=UsersDB%3bUser Id=DmitriyPavlovskiy%40courseproject-server%3bPassword=Dmitriy5473125</Value>
+    </EFMigrations>
+  </ItemGroup>
 </Project>

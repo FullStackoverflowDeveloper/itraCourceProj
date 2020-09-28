@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
   <IisApp path="F:\itra\CourseProject\AppFour\AppFour\obj\Release\netcoreapp3.1\PubTmp\Out\" />
+  <dbfullsql path="F:\itra\CourseProject\AppFour\AppFour\obj\Release\netcoreapp3.1\PubTmp\EFSQLScripts\AppFour.Cotexts.AppDbContext.sql" />
 </sitemanifest>

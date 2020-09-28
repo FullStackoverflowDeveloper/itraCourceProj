@@ -159,6 +159,7 @@ F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Collec
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Collection\Update.cshtml.g.cs
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Entrance\Login.cshtml.g.cs
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Entrance\Registration.cshtml.g.cs
+F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Home\Error.cshtml.g.cs
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Item\Create.cshtml.g.cs
@@ -167,7 +168,6 @@ F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Item\U
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Roles\Create.cshtml.g.cs
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Roles\Edit1.cshtml.g.cs
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Roles\Index.cshtml.g.cs
-F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_AdminLayout.cshtml.g.cs
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_GuestLayout.cshtml.g.cs
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_UserLayout.cshtml.g.cs
@@ -183,4 +183,3 @@ F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\staticwebassets\Ap
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\AppFour.dll
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\AppFour.pdb
 F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\AppFour.genruntimeconfig.cache
-F:\itra\CourseProject\AppFour\AppFour\obj\Debug\netcoreapp3.1\AppFour.csprojAssemblyReference.cache

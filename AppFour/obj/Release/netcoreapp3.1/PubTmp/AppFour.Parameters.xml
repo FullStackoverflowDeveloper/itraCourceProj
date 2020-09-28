@@ -3,4 +3,7 @@
   <parameter name="IIS Web Application Name" description="" value="CourseProjDP" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^F:\\itra\\CourseProject\\AppFour\\AppFour\\obj\\Release\\netcoreapp3\.1\\PubTmp\\Out\\$" />
   </parameter>
+  <parameter name="AppFour.Cotexts.AppDbContext" description="" value="Data Source=tcp:courseproject-server.database.windows.net,1433;Initial Catalog=UsersDB;User Id=DmitriyPavlovskiy@courseproject-server;Password=Dmitriy5473125" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^F:\\itra\\CourseProject\\AppFour\\AppFour\\obj\\Release\\netcoreapp3\.1\\PubTmp\\EFSQLScripts\\AppFour\.Cotexts\.AppDbContext\.sql$" />
+  </parameter>
 </parameters>

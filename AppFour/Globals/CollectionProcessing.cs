@@ -11,11 +11,6 @@ namespace AppFour.Globals
     {
         private static Collection collectionResult;
         private static CollectionAction collectionView;
-        public static Collection GetCollection(CollectionAction collection)
-        {
-            collectionResult = CollectionProcess(collection);
-            return collectionResult;
-        }
 
         public static Collection CollectionProcess(CollectionAction collection)
         {

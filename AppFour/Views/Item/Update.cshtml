@@ -12,6 +12,25 @@
             <label asp-for="Title">Title:</label>
             <input asp-for="Title" class="form-control" />
         </div>
+        
+        @for (int i = 0; i < AppFour.Models.Item.ItemAction.ItemFields.Count(); i++)
+        {
+            <div class="form-group">
+                <label>@AppFour.Models.Item.ItemAction.ItemFields.ElementAt(i).Key:</label><br />
+                @{
+                    AppFour.Models.Fields.FieldData fd = AppFour.Models.Item.ItemAction.ItemData.Where(r => r.FieldId == AppFour.Models.Item.ItemAction.ItemFields.ElementAt(i).Id).FirstOrDefault();
+                }
+                <input type="text" name="DataValue" class="form-control" value="@fd.Value" />
+            </div>
+            <div hidden>
+                <input type="hidden" name="DataFieldId" value="@AppFour.Models.Item.ItemAction.ItemFields.ElementAt(i).Id" />
+                <input type="hidden" name="DataId" value="@fd.Id"/>
+            </div>
+        }
+        <div hidden>
+            <input type="hidden" asp-for="CollectionId" />
+        </div>
+
         <div class="form-group">
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="CollectionId" />

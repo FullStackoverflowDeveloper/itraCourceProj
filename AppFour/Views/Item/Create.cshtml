@@ -9,12 +9,25 @@
 
     <form method="post" asp-action="Create1" asp-controller="Item" enctype="multipart/form-data">
         <div class="form-group">
-            <label asp-for="Title">Name:</label>
+            <label asp-for="Title">Name:</label><br />
             <input asp-for="Title" class="form-control" />
         </div>
-        <div class="form-group" hidden>
+
+        @for (int i = 0; i < AppFour.Models.Item.ItemAction.ItemFields.Count(); i++)
+        {
+            <div class="form-group">
+                <label>@AppFour.Models.Item.ItemAction.ItemFields.ElementAt(i).Key:</label><br />
+                <input type="text" name="DataValue" class="form-control" />
+            </div>
+            <div hidden>
+                <input type="hidden" name="DataFieldId" value="@AppFour.Models.Item.ItemAction.ItemFields.ElementAt(i).Id" />
+            </div>
+        }
+        <div hidden>
             <input type="hidden" asp-for="CollectionId" />
         </div>
+
+        <br />
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
 </div>

@@ -40,6 +40,7 @@ namespace AppFour.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -47,47 +48,6 @@ namespace AppFour.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Collections");
-                });
-
-            modelBuilder.Entity("AppFour.Models.Collection.CustomField", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CollectionId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CollectionId");
-
-                    b.ToTable("CustomFields");
-                });
-
-            modelBuilder.Entity("AppFour.Models.Collection.CustomFieldData", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CustomFieldId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Data")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ItemId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomFieldId");
-
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("CustomFieldsData");
                 });
 
             modelBuilder.Entity("AppFour.Models.Entrance.User", b =>
@@ -167,12 +127,59 @@ namespace AppFour.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("AppFour.Models.Fields.CustomField", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CollectionId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ValueType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CollectionId");
+
+                    b.ToTable("CustomFields");
+                });
+
+            modelBuilder.Entity("AppFour.Models.Fields.FieldData", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FieldId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ItemId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FieldId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("FieldsData");
+                });
+
             modelBuilder.Entity("AppFour.Models.Item.Item", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CollectionId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Title")
@@ -183,22 +190,6 @@ namespace AppFour.Migrations
                     b.HasIndex("CollectionId");
 
                     b.ToTable("Items");
-                });
-
-            modelBuilder.Entity("AppFour.Models.Tag.Tag", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ItemId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -336,32 +327,40 @@ namespace AppFour.Migrations
                 {
                     b.HasOne("AppFour.Models.Entrance.User", "User")
                         .WithMany("Collections")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("AppFour.Models.Collection.CustomField", b =>
+            modelBuilder.Entity("AppFour.Models.Fields.CustomField", b =>
                 {
                     b.HasOne("AppFour.Models.Collection.Collection", "Collection")
-                        .WithMany()
-                        .HasForeignKey("CollectionId");
+                        .WithMany("Fields")
+                        .HasForeignKey("CollectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("AppFour.Models.Collection.CustomFieldData", b =>
+            modelBuilder.Entity("AppFour.Models.Fields.FieldData", b =>
                 {
-                    b.HasOne("AppFour.Models.Collection.CustomField", "CustomField")
-                        .WithMany("CustomFieldData")
-                        .HasForeignKey("CustomFieldId");
+                    b.HasOne("AppFour.Models.Fields.CustomField", "Field")
+                        .WithMany("DataFields")
+                        .HasForeignKey("FieldId");
 
                     b.HasOne("AppFour.Models.Item.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId");
+                        .WithMany("DataFields")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AppFour.Models.Item.Item", b =>
                 {
                     b.HasOne("AppFour.Models.Collection.Collection", "Collection")
                         .WithMany("Items")
-                        .HasForeignKey("CollectionId");
+                        .HasForeignKey("CollectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -82,31 +82,11 @@ namespace AppFour.Controllers
             return View("Index", roleManager.Roles);
         }
 
-        public async Task<IActionResult> Edit(string userId)
-        {
-            User user = await userManager.FindByIdAsync(userId);
-            if(user != null)
-            {
-                var userRoles = await userManager.GetRolesAsync(user);
-                var allRoles = roleManager.Roles.ToList();
-                ChangeRoleModel model = new ChangeRoleModel
-                {
-                    UserId = user.Id,
-                    UserEmail = user.Email,
-                    UserRoles = userRoles,
-                    AllRoles = allRoles
-                };
-                return View(model);
-            }
-            return NotFound();
-        }
-
         public async Task<IActionResult> Edit1(string roleId)
         {
             IdentityRole role = await roleManager.FindByIdAsync(roleId);
             if(role != null)
             {
-        
                 var usersInRole = await userManager.GetUsersInRoleAsync(role.Name);
                 var usersAll = userManager.Users.ToList();
                 ChangeRoleModel1 model = new ChangeRoleModel1
